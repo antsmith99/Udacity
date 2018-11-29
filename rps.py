@@ -87,18 +87,25 @@ class Game:
         print("Player 1: " + move1 + "  Player 2: " + move2)
         if beats(move1, move2) and move1 != move2:
             self.p1.add_to_score()
+            print(move1 + " beats " + move2)
         elif beats(move1, move2) is False and move1 != move2:
             self.p2.add_to_score()
+            print(move2 + " beats " + move1)
+        else:
+            print("Tie")
         self.p1.learn(move1, move2)
         self.p2.learn(move2, move1)
 
     def play_game(self):
         print("Game start!")
         for round in range(3):
-            print("Round " + str(round) + ":")
+            print("Round " + str(round+1) + ":")
             self.play_round()
-        print("Game over! " + "Player 1 won: " + str(self.p1.score) +
-              " round(s) Player 2 won: " + str(self.p2.score) +
+            print(f"""The score after round {str(round+1)} is:
+            Player 1: {self.p1.score}
+            Player 2: {self.p2.score}""")
+        print("Game over!\n""Player 1 won: " + str(self.p1.score) +
+              " round(s)\n" "Player 2 won: " + str(self.p2.score) +
               " round(s)")
         if self.p1.score > self.p2.score:
             print(f"Player 1 wins {self.p1.score} round(s) to {self.p2.score}")
